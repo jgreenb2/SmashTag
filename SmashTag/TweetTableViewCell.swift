@@ -29,10 +29,11 @@ class TweetTableViewCell: UITableViewCell {
         
         // load new information from tweet (if any)
         if let tweet = self.tweet {
-            tweetTextLabel?.text = tweet.text
-            if tweetTextLabel?.text != nil {
+            let highlightedTweetText = highlightTweetText(tweet)
+            tweetTextLabel?.attributedText = highlightedTweetText
+            if tweetTextLabel?.attributedText != nil {
                 for _ in tweet.media {
-                    tweetTextLabel.text! += " 📷"
+                    tweetTextLabel.attributedText! = tweetTextLabel.attributedText! +   " 📷"
                 }
             }
             
@@ -46,6 +47,32 @@ class TweetTableViewCell: UITableViewCell {
             }
         }
     }
+    private struct HighlightColors {
+        static let urlColor = UIColor.blueColor()
+        static let userColor = UIColor.orangeColor()
+        static let hashColor = UIColor.redColor()
+    }
+    
+    func highlightTweetText(tweet: Tweet) -> NSAttributedString {
+        let hashtagIndices = tweet.hashtags
+        let urlIndices = tweet.urls
+        let userIndices = tweet.userMentions
+        
+        var highlightedString = NSMutableAttributedString(string: tweet.text)
+        
+        for hash in hashtagIndices {
+            highlightedString.addAttribute(NSForegroundColorAttributeName, value: HighlightColors.hashColor, range: hash.nsrange)
+        }
+        for user in userIndices {
+            highlightedString.addAttribute(NSForegroundColorAttributeName, value: HighlightColors.userColor, range: user.nsrange)
+        }
+        for url in urlIndices {
+            highlightedString.addAttribute(NSForegroundColorAttributeName, value: HighlightColors.urlColor, range: url.nsrange)
+        }
+        
+        return highlightedString
+    }
+    
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 //        // Initialization code
@@ -59,3 +86,22 @@ class TweetTableViewCell: UITableViewCell {
 
     
 }
+
+private func + (s1: NSAttributedString, s2: String) -> NSAttributedString {
+    var newAStr = NSMutableAttributedString(attributedString: s1)
+    newAStr.appendAttributedString(NSAttributedString(string: s2))
+    return newAStr
+}
+
+private func + (s1: String, s2: NSAttributedString) -> NSAttributedString {
+    var newAStr = NSMutableAttributedString(string: s1)
+    newAStr.appendAttributedString(s2)
+    return newAStr
+}
+
+private func + (s1: NSAttributedString, s2: NSAttributedString) -> NSMutableAttributedString {
+    var newAStr = NSMutableAttributedString(attributedString: s1)
+    newAStr.appendAttributedString(s2)
+    return newAStr
+}
+
