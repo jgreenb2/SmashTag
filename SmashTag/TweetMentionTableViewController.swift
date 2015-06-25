@@ -8,6 +8,21 @@
 
 import UIKit
 
+private struct MentionConfig {
+    struct Title {
+        static let Urls = "Urls"
+        static let Users = "Users"
+        static let Hashtags = "Hashtags"
+        static let Images = "Images"
+    }
+    static let SectionOrder:[String:Int]=[
+        MentionConfig.Title.Images:0,
+        MentionConfig.Title.Hashtags:1,
+        MentionConfig.Title.Urls:2,
+        MentionConfig.Title.Users:3
+    ]
+}
+
 class TweetMentionTableViewController: UITableViewController {
     private enum Mentions {
         case Users(String)
@@ -18,27 +33,29 @@ class TweetMentionTableViewController: UITableViewController {
         var title: String {
             get {
                 switch self {
-                    case .Users(_): return "Users"
-                    case .Urls(_): return "Urls"
-                    case .Hashtags(_): return "Hashtags"
-                    case .Images(_): return "Images"
+                    case .Users(_): return MentionConfig.Title.Users
+                    case .Urls(_): return MentionConfig.Title.Urls
+                    case .Hashtags(_): return MentionConfig.Title.Hashtags
+                    case .Images(_): return MentionConfig.Title.Images
                 }
             }
         }
     }
     
-    private var mentions = [String:[Mentions]]()
+    private var mentions = [[Mentions]](count: MentionConfig.SectionOrder.count,
+                                        repeatedValue: [Mentions]())
     
     private func addMention(mention m: Mentions) {
-        if mentions[m.title] != nil {
-            mentions[m.title]!.append(m)
-        } else {
-            mentions[m.title] = [m]
+        if let i = MentionConfig.SectionOrder[m.title] {
+            mentions[i] += [m]
         }
     }
     
     var tweet: Tweet? {
         didSet {
+            for mediaItem in tweet!.media {
+                addMention(mention: Mentions.Images(mediaItem.aspectRatio, mediaItem.url))
+            }
             for url in tweet!.urls {
                 addMention(mention: Mentions.Urls(url.description))
             }
@@ -48,15 +65,9 @@ class TweetMentionTableViewController: UITableViewController {
             for user in tweet!.userMentions {
                 addMention(mention: Mentions.Users(user.description))
             }
-            for mediaItem in tweet!.media {
-                addMention(mention: Mentions.Images(mediaItem.aspectRatio, mediaItem.url))
-            }
         }
     }
     
-    private struct MentionConfig {
-        static let NumberOfMentionSections = 4
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
