@@ -9,7 +9,50 @@
 import UIKit
 
 class TweetMentionTableViewController: UITableViewController {
-    var tweet: Tweet?
+    private enum Mentions {
+        case Users(String)
+        case Urls(String)
+        case Hashtags(String)
+        case Images(Double, NSURL)
+        
+        var title: String {
+            get {
+                switch self {
+                    case .Users(_): return "Users"
+                    case .Urls(_): return "Urls"
+                    case .Hashtags(_): return "Hashtags"
+                    case .Images(_): return "Images"
+                }
+            }
+        }
+    }
+    
+    private var mentions = [String:[Mentions]]()
+    
+    private func addMention(mention m: Mentions) {
+        if mentions[m.title] != nil {
+            mentions[m.title]!.append(m)
+        } else {
+            mentions[m.title] = [m]
+        }
+    }
+    
+    var tweet: Tweet? {
+        didSet {
+            for url in tweet!.urls {
+                addMention(mention: Mentions.Urls(url.description))
+            }
+            for hashtag in tweet!.hashtags {
+                addMention(mention: Mentions.Hashtags(hashtag.description))
+            }
+            for user in tweet!.userMentions {
+                addMention(mention: Mentions.Users(user.description))
+            }
+            for mediaItem in tweet!.media {
+                addMention(mention: Mentions.Images(mediaItem.aspectRatio, mediaItem.url))
+            }
+        }
+    }
     
     private struct MentionConfig {
         static let NumberOfMentionSections = 4
@@ -30,7 +73,7 @@ class TweetMentionTableViewController: UITableViewController {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         //return MentionConfig.NumberOfMentionSections
-        return 1
+        return 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,7 +89,7 @@ class TweetMentionTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellResuseIdentifier, forIndexPath: indexPath) as! MentionTableViewCell
 
-        // Configure the cell...
+        // Configure the cell by passing it the selected tweet
         cell.tweet = tweet
         return cell
     }

@@ -120,7 +120,13 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
 
-
+    /*  when the users taps on a tweet we segue to a new table view that
+        show the various mentions (user, url, hashtag, images)
+    
+        prepareForSegue passes the entire tweet to the new tableview controller
+        since that's the easiest way to pass the mention data
+    
+    */
     @IBOutlet var tweetTableView: UITableView!
     private struct TweetTableSegues {
         static let MentionSegue = "ShowMentionTable"
