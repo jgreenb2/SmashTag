@@ -20,13 +20,13 @@
                             <textInputTraits key="textInputTraits" keyboardType="twitter"/>
                         </textField>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" rowHeight="131" id="JBG-pf-9AE" customClass="TweetTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Tweet" rowHeight="131" id="JBG-pf-9AE" customClass="TweetTableViewCell" customModule="SmashTag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JBG-pf-9AE" id="16C-bD-cTN">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPs-U3-rB7">
-                                            <rect key="frame" x="64" y="8" width="528" height="19.5"/>
+                                            <rect key="frame" x="64" y="8" width="495" height="19.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfC-4A-stj">
-                                            <rect key="frame" x="64" y="36" width="528" height="86.5"/>
+                                            <rect key="frame" x="64" y="36" width="495" height="86.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -61,6 +61,7 @@
                                     <outlet property="tweetProfileImageView" destination="in5-8O-Q04" id="ToU-GW-hlP"/>
                                     <outlet property="tweetScreenNameLabel" destination="mPs-U3-rB7" id="jRu-jc-vOm"/>
                                     <outlet property="tweetTextLabel" destination="gfC-4A-stj" id="Jcp-GC-0CI"/>
+                                    <segue destination="nOk-pY-Ep9" kind="show" identifier="ShowMentionTable" id="gLk-bL-g5k"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -80,11 +81,63 @@
                     </refreshControl>
                     <connections>
                         <outlet property="searchTextField" destination="3lx-lD-tfs" id="jHf-Hc-aVy"/>
+                        <outlet property="tweetTableView" destination="6MX-0g-QUJ" id="5q2-od-Bsq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7KL-3o-Hya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1440" y="762"/>
+        </scene>
+        <!--Tweet Mention Table View Controller-->
+        <scene sceneID="JU7-ZZ-0PZ">
+            <objects>
+                <tableViewController id="XoJ-bS-pcQ" customClass="TweetMentionTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0Sa-sJ-gmt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Mentions" id="b0V-iO-y4w" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b0V-iO-y4w" id="2S2-rU-QmQ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZf-IN-obQ">
+                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="584" id="Lcg-7H-m49"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Lcg-7H-m49"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="top" secondItem="2S2-rU-QmQ" secondAttribute="topMargin" id="GmE-BH-YuC"/>
+                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="leading" secondItem="2S2-rU-QmQ" secondAttribute="leadingMargin" id="mu8-Wb-4wp"/>
+                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="trailing" secondItem="2S2-rU-QmQ" secondAttribute="trailingMargin" id="qQv-Zq-JZz"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="debugContent" destination="VZf-IN-obQ" id="tGc-Gc-x9d"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XoJ-bS-pcQ" id="uIy-xy-AHH"/>
+                            <outlet property="delegate" destination="XoJ-bS-pcQ" id="8il-aT-dqA"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="QO2-kG-Jy8"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRl-iz-YzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2252" y="1476"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uqT-fv-sVS">
@@ -103,6 +156,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6a-aU-I8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="628" y="762"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kmj-By-Z2A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nOk-pY-Ep9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QV5-d8-Bdx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XoJ-bS-pcQ" kind="relationship" relationship="rootViewController" id="yvI-dh-LQ0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pG0-PZ-wCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1440" y="1476"/>
         </scene>
     </scenes>
 </document>

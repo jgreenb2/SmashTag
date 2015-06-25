@@ -120,6 +120,30 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
 
+
+    @IBOutlet var tweetTableView: UITableView!
+    private struct TweetTableSegues {
+        static let MentionSegue = "ShowMentionTable"
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var destination = segue.destinationViewController as? UIViewController
+        if let navCon = destination as? UINavigationController {
+            destination = navCon.visibleViewController
+        }
+        if let mentionTableViewController = destination as? TweetMentionTableViewController {
+            if let identifier = segue.identifier {
+                switch identifier {
+                    case TweetTableSegues.MentionSegue:
+                        if let row = tweetTableView.indexPathForSelectedRow()?.row {
+                            let section = tweetTableView.indexPathForSelectedRow()!.section
+                            mentionTableViewController.tweet = tweets[section][row]
+                        }
+                    default: break
+                }
+            }
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

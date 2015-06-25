@@ -54,19 +54,16 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     func highlightTweetText(tweet: Tweet) -> NSAttributedString {
-        let hashtagIndices = tweet.hashtags
-        let urlIndices = tweet.urls
-        let userIndices = tweet.userMentions
         
         var highlightedString = NSMutableAttributedString(string: tweet.text)
         
-        for hash in hashtagIndices {
+        for hash in tweet.hashtags {
             highlightedString.addAttribute(NSForegroundColorAttributeName, value: HighlightColors.hashColor, range: hash.nsrange)
         }
-        for user in userIndices {
+        for user in tweet.userMentions {
             highlightedString.addAttribute(NSForegroundColorAttributeName, value: HighlightColors.userColor, range: user.nsrange)
         }
-        for url in urlIndices {
+        for url in tweet.urls {
             highlightedString.addAttribute(NSForegroundColorAttributeName, value: HighlightColors.urlColor, range: url.nsrange)
         }
         
