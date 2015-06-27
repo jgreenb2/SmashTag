@@ -64,7 +64,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                             self.lastSuccessfulRequest = request
                             self.tweets.insert(newTweets, atIndex: 0)
                             self.tableView.reloadData()
-                            //sender?.endRefreshing()
+                            self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections())), withRowAnimation: .None)
                         }
                         sender?.endRefreshing()
                     }
