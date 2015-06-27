@@ -138,6 +138,16 @@ class TweetMentionTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let mention = mentions[indexPath.section][indexPath.row]
+        switch mention {
+            case .Urls(let url):
+                UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            default:
+                return
+        }
+    }
+    
     private struct SearchSegues {
         static let NewSearch = "goToNewSearch"
     }
