@@ -8,13 +8,15 @@
 
 import UIKit
 
-private struct MentionConfig {
+struct MentionConfig {
+    // define section names
     struct Title {
         static let Urls = "Urls"
         static let Users = "Users"
         static let Hashtags = "Hashtags"
         static let Images = "Images"
     }
+    // change the section ordering here
     static let SectionOrder:[String:Int]=[
         MentionConfig.Title.Images:0,
         MentionConfig.Title.Hashtags:1,
@@ -23,24 +25,36 @@ private struct MentionConfig {
     ]
 }
 
-class TweetMentionTableViewController: UITableViewController {
-    private enum Mentions {
-        case Users(String)
-        case Urls(String)
-        case Hashtags(String)
-        case Images(Double, NSURL)
-        
-        var title: String {
-            get {
-                switch self {
-                    case .Users(_): return MentionConfig.Title.Users
-                    case .Urls(_): return MentionConfig.Title.Urls
-                    case .Hashtags(_): return MentionConfig.Title.Hashtags
-                    case .Images(_): return MentionConfig.Title.Images
-                }
+enum Mentions {
+    case Users(String)
+    case Urls(String)
+    case Hashtags(String)
+    case Images(Double, NSURL)
+    
+    var title: String {
+        get {
+            switch self {
+            case .Users(_): return MentionConfig.Title.Users
+            case .Urls(_): return MentionConfig.Title.Urls
+            case .Hashtags(_): return MentionConfig.Title.Hashtags
+            case .Images(_): return MentionConfig.Title.Images
             }
         }
     }
+    
+    var isImage: Bool {
+        switch self {
+            case .Images(_,_): return true
+            default: return false
+        }
+    }
+}
+
+
+class TweetMentionTableViewController: UITableViewController {
+    // MARK: - Table view data structures
+    // the model for the Mention MVC is a refactored version of the
+    // mention data contained in the referenced tweet
     
     private var mentions = [[Mentions]](count: MentionConfig.SectionOrder.count,
                                         repeatedValue: [Mentions]())
@@ -51,95 +65,90 @@ class TweetMentionTableViewController: UITableViewController {
         }
     }
     
+    private var cellWidth:CGFloat?
+    private var cellHeight:CGFloat=44
+    
     var tweet: Tweet? {
         didSet {
             for mediaItem in tweet!.media {
                 addMention(mention: Mentions.Images(mediaItem.aspectRatio, mediaItem.url))
             }
             for url in tweet!.urls {
-                addMention(mention: Mentions.Urls(url.description))
+                addMention(mention: Mentions.Urls(url.keyword))
             }
             for hashtag in tweet!.hashtags {
-                addMention(mention: Mentions.Hashtags(hashtag.description))
+                addMention(mention: Mentions.Hashtags(hashtag.keyword))
             }
             for user in tweet!.userMentions {
-                addMention(mention: Mentions.Users(user.description))
+                addMention(mention: Mentions.Users(user.keyword))
             }
         }
     }
     
-    
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    // MARK: - Table view data source
 
+    // MARK: - Table view dataSource
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        //return MentionConfig.NumberOfMentionSections
-        return 4
+        return MentionConfig.SectionOrder.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 1
+        return mentions[section].count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return mentions[section].first?.title
+//        if mentions[section].count > 0 {
+//            return mentions[section][0].title
+//        } else {
+//            return nil
+//        }
     }
 
     private struct Storyboard {
-        static let CellResuseIdentifier = "Mentions"
+        static let TextCellIdentifier = "TextMentions"
+        static let ImageCellIdentifier = "ImageMentions"
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellResuseIdentifier, forIndexPath: indexPath) as! MentionTableViewCell
-
-        // Configure the cell by passing it the selected tweet
-        cell.tweet = tweet
+        var cell:MentionTableViewCell
+        var cellType:String
+        
+        let mention = mentions[indexPath.section][indexPath.row]
+        if mention.isImage {
+            cellType = Storyboard.ImageCellIdentifier
+        } else {
+            cellType = Storyboard.TextCellIdentifier
+        }
+        cell = tableView.dequeueReusableCellWithIdentifier(cellType, forIndexPath: indexPath) as! MentionTableViewCell
+        cellHeight = cell.frame.height
+        cellWidth = cell.frame.width
+        
+        // Configure the cell by passing it the selected tweet data
+        cell.mention = mention
+        
         return cell
     }
 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        // get width of current row
+        let mention = mentions[indexPath.section][indexPath.row]
+        cellWidth = view.frame.width
+        switch mention {
+            case .Images(let aspectRatio, _):
+                if let width = cellWidth {
+                    return CGFloat(Double(width) / aspectRatio)
+                } else { return cellHeight }
+            default:
+                return cellHeight
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation

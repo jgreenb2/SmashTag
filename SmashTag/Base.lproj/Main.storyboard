@@ -36,7 +36,13 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="48" id="AiI-ak-cCP"/>
                                                 <constraint firstAttribute="height" constant="48" id="DEg-O0-6Tu"/>
+                                                <constraint firstAttribute="height" constant="48" id="z3R-84-rbY"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="DEg-O0-6Tu"/>
+                                                </mask>
+                                            </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfC-4A-stj">
                                             <rect key="frame" x="64" y="36" width="495" height="86.5"/>
@@ -97,34 +103,63 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Mentions" id="b0V-iO-y4w" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextMentions" rowHeight="38" id="b0V-iO-y4w" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b0V-iO-y4w" id="2S2-rU-QmQ">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZf-IN-obQ">
-                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="584" id="Lcg-7H-m49"/>
-                                            </constraints>
+                                            <rect key="frame" x="8" y="8" width="584" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="Lcg-7H-m49"/>
-                                                </mask>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="top" secondItem="2S2-rU-QmQ" secondAttribute="topMargin" id="GmE-BH-YuC"/>
-                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="leading" secondItem="2S2-rU-QmQ" secondAttribute="leadingMargin" id="mu8-Wb-4wp"/>
-                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="trailing" secondItem="2S2-rU-QmQ" secondAttribute="trailingMargin" id="qQv-Zq-JZz"/>
+                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="top" secondItem="2S2-rU-QmQ" secondAttribute="topMargin" id="27B-AN-Kju"/>
+                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="leading" secondItem="2S2-rU-QmQ" secondAttribute="leadingMargin" id="9pW-qn-fb0"/>
+                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="bottom" secondItem="2S2-rU-QmQ" secondAttribute="bottomMargin" id="Nz2-Vz-MYe"/>
+                                        <constraint firstItem="VZf-IN-obQ" firstAttribute="trailing" secondItem="2S2-rU-QmQ" secondAttribute="trailingMargin" id="iMc-hy-xa2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="debugContent" destination="VZf-IN-obQ" id="tGc-Gc-x9d"/>
+                                    <outlet property="textView" destination="VZf-IN-obQ" id="iJy-Bt-9RM"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="redraw" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageMentions" id="sSr-Hj-h6G" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" verticalHuggingPriority="252" tableViewCell="sSr-Hj-h6G" id="QHH-yU-r70">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XsL-hW-4C5">
+                                            <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="3pj-Uy-XX0"/>
+                                                <constraint firstAttribute="width" constant="100" id="ySd-hy-RWk"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="3pj-Uy-XX0"/>
+                                                    <exclude reference="ySd-hy-RWk"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XsL-hW-4C5" firstAttribute="top" secondItem="QHH-yU-r70" secondAttribute="topMargin" id="VnZ-mE-ubI"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="XsL-hW-4C5" secondAttribute="bottom" id="YnH-kP-hHT"/>
+                                        <constraint firstItem="XsL-hW-4C5" firstAttribute="centerX" secondItem="QHH-yU-r70" secondAttribute="centerX" id="ZKx-aV-Goy"/>
+                                        <constraint firstItem="XsL-hW-4C5" firstAttribute="leading" secondItem="QHH-yU-r70" secondAttribute="leadingMargin" id="c1L-xf-pQ2"/>
+                                        <constraint firstItem="XsL-hW-4C5" firstAttribute="trailing" secondItem="QHH-yU-r70" secondAttribute="trailingMargin" id="zuF-eT-Gx3"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="ZKx-aV-Goy"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="mentionView" destination="XsL-hW-4C5" id="hej-pa-0JX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

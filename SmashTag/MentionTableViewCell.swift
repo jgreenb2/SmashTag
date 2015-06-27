@@ -9,13 +9,47 @@
 import UIKit
 
 class MentionTableViewCell: UITableViewCell {
-    @IBOutlet weak var debugContent: UILabel!
-    var tweet: Tweet? {
+    @IBOutlet weak var textView: UILabel!
+    @IBOutlet weak var mentionView: UIImageView!
+    var imageUrl = NSURL()
+    
+    var  mention: Mentions? {
         didSet {
-            debugContent.text=tweet?.description
+            switch mention! {
+                case .Images(let aspectRatio, let url):
+                    fetchImage(aspectRatio, url)
+                case .Users(let userName):
+                    refreshTextCell(userName)
+                case .Urls(let urlString):
+                    refreshTextCell(urlString)
+                case .Hashtags(let hashtagString):
+                    refreshTextCell(hashtagString)
+            }
+        }
+    }
+    
+    func fetchImage(aspectRatio: Double, _ url: NSURL) {
+        let qos = Int(QOS_CLASS_USER_INITIATED.value) // legacy qos variable stuff
+        imageUrl = url
+        dispatch_async(dispatch_get_global_queue(qos, 0)) {
+            let imageData = NSData(contentsOfURL: url)
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                if url == self.imageUrl {           // is captured url out of date?
+                    if imageData != nil {
+                        self.imageView?.sizeToFit()
+                        self.mentionView.image = UIImage(data: imageData!)
+                    } else {
+                        self.mentionView.image = nil
+                    }
+                }
+            }
         }
     }
 
+    func refreshTextCell(string: String) {
+        textView.text = string
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
