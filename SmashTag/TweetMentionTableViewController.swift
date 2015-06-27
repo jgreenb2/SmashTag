@@ -65,9 +65,6 @@ class TweetMentionTableViewController: UITableViewController {
         }
     }
     
-    private var cellWidth:CGFloat?
-    private var cellHeight:CGFloat=44
-    
     var tweet: Tweet? {
         didSet {
             for mediaItem in tweet!.media {
@@ -127,8 +124,6 @@ class TweetMentionTableViewController: UITableViewController {
             cellType = Storyboard.TextCellIdentifier
         }
         cell = tableView.dequeueReusableCellWithIdentifier(cellType, forIndexPath: indexPath) as! MentionTableViewCell
-        cellHeight = cell.frame.height
-        cellWidth = cell.frame.width
         
         // Configure the cell by passing it the selected tweet data
         cell.mention = mention
@@ -139,14 +134,11 @@ class TweetMentionTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         // get width of current row
         let mention = mentions[indexPath.section][indexPath.row]
-        cellWidth = view.frame.width
         switch mention {
             case .Images(let aspectRatio, _):
-                if let width = cellWidth {
-                    return CGFloat(Double(width) / aspectRatio)
-                } else { return cellHeight }
+                    return CGFloat(Double(view.frame.width) / aspectRatio)
             default:
-                return cellHeight
+                return UITableViewAutomaticDimension
         }
     }
 
