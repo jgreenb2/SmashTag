@@ -94,18 +94,11 @@ class TweetMentionTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return mentions[section].count
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return mentions[section].first?.title
-//        if mentions[section].count > 0 {
-//            return mentions[section][0].title
-//        } else {
-//            return nil
-//        }
     }
 
     private struct Storyboard {
@@ -132,7 +125,6 @@ class TweetMentionTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        // get width of current row
         let mention = mentions[indexPath.section][indexPath.row]
         switch mention {
             case .Images(let aspectRatio, _):
