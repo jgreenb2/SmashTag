@@ -50,11 +50,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
        refresh(refreshControl)
     }
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
 
+    @IBAction func unwindToNewSearch(segue: UIStoryboardSegue) {
+        
+    }
+    
     @IBAction func refresh(sender: UIRefreshControl?) {
         if searchText != nil {
             if let request = nextRequestToAttempt {

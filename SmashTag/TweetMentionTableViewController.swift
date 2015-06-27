@@ -104,6 +104,7 @@ class TweetMentionTableViewController: UITableViewController {
     private struct Storyboard {
         static let TextCellIdentifier = "TextMentions"
         static let ImageCellIdentifier = "ImageMentions"
+        static let URLCellIdentifier = "URLMentions"
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -111,10 +112,13 @@ class TweetMentionTableViewController: UITableViewController {
         var cellType:String
         
         let mention = mentions[indexPath.section][indexPath.row]
-        if mention.isImage {
-            cellType = Storyboard.ImageCellIdentifier
-        } else {
-            cellType = Storyboard.TextCellIdentifier
+        switch mention {
+            case .Images(_, _):
+                cellType = Storyboard.ImageCellIdentifier
+            case .Urls(_):
+                cellType = Storyboard.URLCellIdentifier
+            default:
+                cellType = Storyboard.TextCellIdentifier
         }
         cell = tableView.dequeueReusableCellWithIdentifier(cellType, forIndexPath: indexPath) as! MentionTableViewCell
         
@@ -131,6 +135,31 @@ class TweetMentionTableViewController: UITableViewController {
                     return CGFloat(Double(view.frame.width) / aspectRatio)
             default:
                 return UITableViewAutomaticDimension
+        }
+    }
+    
+    private struct SearchSegues {
+        static let NewSearch = "goToNewSearch"
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var destination = segue.destinationViewController as? UIViewController
+        if let navCon = destination as? UINavigationController {
+            destination = navCon.visibleViewController
+        }
+        if let ttvc = destination as? TweetTableViewController {
+            if let identifier = segue.identifier {
+                switch identifier {
+                case SearchSegues.NewSearch:
+                    if let textCell = sender as? MentionTableViewCell {
+                        if let cellID = textCell.reuseIdentifier {
+                            if cellID == Storyboard.TextCellIdentifier {
+                                ttvc.searchText = textCell.textView.text
+                            }
+                        }
+                    }
+                default: break
+                }
+            }
         }
     }
 

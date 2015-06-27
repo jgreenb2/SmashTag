@@ -11,6 +11,8 @@ import UIKit
 class MentionTableViewCell: UITableViewCell {
     @IBOutlet weak var textView: UILabel!
     @IBOutlet weak var mentionView: UIImageView!
+    @IBOutlet weak var urlView: UILabel!
+    
     var imageUrl = NSURL()
     
     var  mention: Mentions? {
@@ -21,7 +23,7 @@ class MentionTableViewCell: UITableViewCell {
                 case .Users(let userName):
                     refreshTextCell(userName)
                 case .Urls(let urlString):
-                    refreshTextCell(urlString)
+                    refreshURLCell(urlString)
                 case .Hashtags(let hashtagString):
                     refreshTextCell(hashtagString)
             }
@@ -49,7 +51,13 @@ class MentionTableViewCell: UITableViewCell {
     func refreshTextCell(string: String) {
         textView.text = string
     }
-    
+ 
+    func refreshURLCell(string: String) {
+        var attributes = [NSUnderlineStyleAttributeName:1, NSForegroundColorAttributeName: UIColor.blueColor()]
+        var attributedString = NSAttributedString(string: string, attributes: attributes)
+        urlView.attributedText = attributedString
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

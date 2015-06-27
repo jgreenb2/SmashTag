@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="m2a-Le-IIL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="m2a-Le-IIL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -26,7 +26,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPs-U3-rB7">
-                                            <rect key="frame" x="64" y="8" width="495" height="19.5"/>
+                                            <rect key="frame" x="64" y="8" width="495" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                                             </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfC-4A-stj">
-                                            <rect key="frame" x="64" y="36" width="495" height="86.5"/>
+                                            <rect key="frame" x="64" y="36" width="495" height="86"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -103,13 +103,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextMentions" rowHeight="38" id="b0V-iO-y4w" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TextMentions" rowHeight="38" id="b0V-iO-y4w" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b0V-iO-y4w" id="2S2-rU-QmQ">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZf-IN-obQ">
-                                            <rect key="frame" x="8" y="8" width="584" height="21.5"/>
+                                            <rect key="frame" x="8" y="8" width="551" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -124,6 +124,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="textView" destination="VZf-IN-obQ" id="iJy-Bt-9RM"/>
+                                    <segue destination="ugv-S7-4EP" kind="unwind" identifier="goToNewSearch" unwindAction="unwindToNewSearch:" id="bMs-x5-rqg"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="redraw" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageMentions" id="sSr-Hj-h6G" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
@@ -132,7 +133,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XsL-hW-4C5">
-                                            <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                            <rect key="frame" x="8" y="8" width="584" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="3pj-Uy-XX0"/>
                                                 <constraint firstAttribute="width" constant="100" id="ySd-hy-RWk"/>
@@ -162,6 +163,28 @@
                                     <outlet property="mentionView" destination="XsL-hW-4C5" id="hej-pa-0JX"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="redraw" selectionStyle="default" indentationWidth="10" reuseIdentifier="URLMentions" id="r1C-5U-PgP" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" verticalHuggingPriority="252" tableViewCell="r1C-5U-PgP" id="Zrr-SQ-b6E">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhM-hy-SHb">
+                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="leading" secondItem="Zrr-SQ-b6E" secondAttribute="leadingMargin" id="3qM-jw-0gF"/>
+                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="trailing" secondItem="Zrr-SQ-b6E" secondAttribute="trailingMargin" id="85b-7M-X5y"/>
+                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="top" secondItem="Zrr-SQ-b6E" secondAttribute="topMargin" id="Ubg-5B-Jfu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="urlView" destination="lhM-hy-SHb" id="76m-nF-GJv"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="XoJ-bS-pcQ" id="uIy-xy-AHH"/>
@@ -171,6 +194,7 @@
                     <navigationItem key="navigationItem" id="QO2-kG-Jy8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRl-iz-YzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ugv-S7-4EP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2252" y="1476"/>
         </scene>

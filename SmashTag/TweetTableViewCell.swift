@@ -69,19 +69,6 @@ class TweetTableViewCell: UITableViewCell {
         
         return highlightedString
     }
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-
-    
 }
 
 private func + (s1: NSAttributedString, s2: String) -> NSAttributedString {
