@@ -163,27 +163,22 @@ class TweetMentionTableViewController: UITableViewController, ImageDataDelegate 
         if let navCon = destination as? UINavigationController {
             destination = navCon.visibleViewController
         }
-        if let ttvc = destination as? TweetTableViewController {
-            if let identifier = segue.identifier {
+        if let identifier = segue.identifier {
+            if let cell = sender as? MentionTableViewCell {
                 switch identifier {
-                case TweetSegues.NewSearch:
-                    if let textCell = sender as? MentionTableViewCell {
-                        if let cellID = textCell.reuseIdentifier {
+                    case TweetSegues.NewSearch:
+                    if let ttvc = destination as? TweetTableViewController {
+                        if let cellID = cell.reuseIdentifier {
                             if cellID == Storyboard.TextCellIdentifier {
-                                ttvc.searchText = textCell.textView.text
+                                ttvc.searchText = cell.textView.text
                             }
                         }
                     }
-                default: break
-                }
-            }
-        } else if let sivc = destination as? ScrollableImageViewController {
-            if let identifier = segue.identifier {
-                switch identifier {
-                case TweetSegues.ScrollableImageView:
-                    println("scrollable image view")
-                    sivc.imageData = imageData       
-                default: break
+                    case TweetSegues.ScrollableImageView:
+                        if let sivc = destination as? ScrollableImageViewController {
+                            sivc.imageData = imageData
+                        }
+                    default: break
                 }
             }
         }
