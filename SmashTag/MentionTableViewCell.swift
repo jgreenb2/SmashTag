@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol ImageDataDelegate: class {
+    func updateImageData(imageData: NSData)
+}
+
 class MentionTableViewCell: UITableViewCell {
     @IBOutlet weak var textView: UILabel!
     @IBOutlet weak var mentionView: UIImageView!
     @IBOutlet weak var urlView: UILabel!
     
+    weak var delegate: ImageDataDelegate?
     var imageUrl = NSURL()
     
     var  mention: Mentions? {
@@ -40,6 +45,7 @@ class MentionTableViewCell: UITableViewCell {
                     if imageData != nil {
                         self.imageView?.sizeToFit()
                         self.mentionView.image = UIImage(data: imageData!)
+                        self.delegate?.updateImageData(imageData!)
                     } else {
                         self.mentionView.image = nil
                     }

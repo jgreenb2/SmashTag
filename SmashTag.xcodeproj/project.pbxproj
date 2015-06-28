@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		752379B41B3F8FCE00EEFEB9 /* ScrollableImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752379B31B3F8FCE00EEFEB9 /* ScrollableImageViewController.swift */; };
 		7523BC3D1B384E9400F9C3FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523BC3C1B384E9400F9C3FD /* AppDelegate.swift */; };
 		7523BC3F1B384E9400F9C3FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523BC3E1B384E9400F9C3FD /* ViewController.swift */; };
 		7523BC421B384E9400F9C3FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7523BC401B384E9400F9C3FD /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		752379B31B3F8FCE00EEFEB9 /* ScrollableImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableImageViewController.swift; sourceTree = "<group>"; };
 		7523BC371B384E9400F9C3FD /* SmashTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmashTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7523BC3B1B384E9400F9C3FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7523BC3C1B384E9400F9C3FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				7523BC3E1B384E9400F9C3FD /* ViewController.swift */,
 				7523BC401B384E9400F9C3FD /* Main.storyboard */,
+				752379B31B3F8FCE00EEFEB9 /* ScrollableImageViewController.swift */,
 				754C4FC91B3B5C6D00027D05 /* TweetMentionTableViewController.swift */,
 				754C4FCB1B3BB4D300027D05 /* MentionTableViewCell.swift */,
 				755641C91B386DF5007F964F /* TweetTableViewCell.swift */,
@@ -250,6 +253,7 @@
 				75F192FC1B3860A400DE81D5 /* MediaItem.swift in Sources */,
 				7523BC3F1B384E9400F9C3FD /* ViewController.swift in Sources */,
 				7523BC3D1B384E9400F9C3FD /* AppDelegate.swift in Sources */,
+				752379B41B3F8FCE00EEFEB9 /* ScrollableImageViewController.swift in Sources */,
 				75F192FE1B3860A400DE81D5 /* TwitterRequest.swift in Sources */,
 				75F192FF1B3860A400DE81D5 /* User.swift in Sources */,
 				754C4FCC1B3BB4D300027D05 /* MentionTableViewCell.swift in Sources */,

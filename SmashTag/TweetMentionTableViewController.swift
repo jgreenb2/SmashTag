@@ -51,7 +51,7 @@ enum Mentions {
 }
 
 
-class TweetMentionTableViewController: UITableViewController {
+class TweetMentionTableViewController: UITableViewController, ImageDataDelegate {
     // MARK: - Table view data structures
     // the model for the Mention MVC is a refactored version of the
     // mention data contained in the referenced tweet
@@ -81,6 +81,8 @@ class TweetMentionTableViewController: UITableViewController {
             }
         }
     }
+    
+    var imageData: NSData?
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -121,10 +123,10 @@ class TweetMentionTableViewController: UITableViewController {
                 cellType = Storyboard.TextCellIdentifier
         }
         cell = tableView.dequeueReusableCellWithIdentifier(cellType, forIndexPath: indexPath) as! MentionTableViewCell
-        
+
         // Configure the cell by passing it the selected tweet data
         cell.mention = mention
-        
+        cell.delegate = self        // assign delegate to return imageData
         return cell
     }
 
@@ -148,8 +150,13 @@ class TweetMentionTableViewController: UITableViewController {
         }
     }
     
-    private struct SearchSegues {
+    func updateImageData(imageData: NSData) {
+        self.imageData = imageData
+    }
+    
+    private struct TweetSegues {
         static let NewSearch = "goToNewSearch"
+        static let ScrollableImageView = "showImage"
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var destination = segue.destinationViewController as? UIViewController
@@ -159,7 +166,7 @@ class TweetMentionTableViewController: UITableViewController {
         if let ttvc = destination as? TweetTableViewController {
             if let identifier = segue.identifier {
                 switch identifier {
-                case SearchSegues.NewSearch:
+                case TweetSegues.NewSearch:
                     if let textCell = sender as? MentionTableViewCell {
                         if let cellID = textCell.reuseIdentifier {
                             if cellID == Storyboard.TextCellIdentifier {
@@ -167,6 +174,15 @@ class TweetMentionTableViewController: UITableViewController {
                             }
                         }
                     }
+                default: break
+                }
+            }
+        } else if let sivc = destination as? ScrollableImageViewController {
+            if let identifier = segue.identifier {
+                switch identifier {
+                case TweetSegues.ScrollableImageView:
+                    println("scrollable image view")
+                    sivc.imageData = imageData       
                 default: break
                 }
             }
