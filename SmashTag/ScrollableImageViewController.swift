@@ -10,11 +10,13 @@ import UIKit
 
 class ScrollableImageViewController: UIViewController, UIScrollViewDelegate {
 
+    var mustInitializeZoom = true
+    
     var imageData:NSData? {
         didSet {
             imageView.image = UIImage(data: imageData!)
-            imageView.sizeToFit()
             scrollView?.contentSize = imageView.frame.size
+            imageView.sizeToFit()
         }
     }
     
@@ -29,6 +31,18 @@ class ScrollableImageViewController: UIViewController, UIScrollViewDelegate {
 
     private var imageView = UIImageView()
     
+    func zoomToFit() {
+        if mustInitializeZoom {
+            let iw = imageView.image!.size.width
+            let vw = scrollView!.superview!.frame.width
+            scrollView.zoomScale = vw / iw
+        }
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        mustInitializeZoom = false
+    }
+    
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageView
     }
@@ -37,7 +51,11 @@ class ScrollableImageViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         scrollView.addSubview(imageView)
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        zoomToFit()
+    }
+    
     /*
     // MARK: - Navigation
 

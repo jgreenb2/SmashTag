@@ -107,14 +107,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-E5-qTN">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="16" y="72" width="568" height="528"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bZn-E5-qTN" firstAttribute="leading" secondItem="38s-Z3-mcL" secondAttribute="leadingMargin" constant="-16" id="77b-Y0-Oc0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bZn-E5-qTN" secondAttribute="trailing" constant="-16" id="SXv-xd-tgz"/>
-                            <constraint firstItem="bZn-E5-qTN" firstAttribute="top" secondItem="RA5-8q-vO5" secondAttribute="bottom" constant="-64" id="V6a-Ol-Vl3"/>
+                            <constraint firstItem="bZn-E5-qTN" firstAttribute="leading" secondItem="38s-Z3-mcL" secondAttribute="leadingMargin" id="77b-Y0-Oc0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bZn-E5-qTN" secondAttribute="trailing" id="SXv-xd-tgz"/>
+                            <constraint firstItem="bZn-E5-qTN" firstAttribute="top" secondItem="RA5-8q-vO5" secondAttribute="bottom" constant="8" symbolic="YES" id="V6a-Ol-Vl3"/>
                             <constraint firstItem="eC7-N3-scf" firstAttribute="top" secondItem="bZn-E5-qTN" secondAttribute="bottom" id="tdP-N3-dYm"/>
                         </constraints>
                     </view>
@@ -159,13 +159,13 @@
                                     <segue destination="ugv-S7-4EP" kind="unwind" identifier="goToNewSearch" unwindAction="unwindToNewSearch:" id="bMs-x5-rqg"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="redraw" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageMentions" id="sSr-Hj-h6G" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                            <tableViewCell contentMode="redraw" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ImageMentions" id="sSr-Hj-h6G" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" verticalHuggingPriority="252" tableViewCell="sSr-Hj-h6G" id="QHH-yU-r70">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XsL-hW-4C5">
-                                            <rect key="frame" x="8" y="8" width="584" height="27"/>
+                                            <rect key="frame" x="8" y="8" width="551" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="3pj-Uy-XX0"/>
                                                 <constraint firstAttribute="width" constant="100" id="ySd-hy-RWk"/>
