@@ -9,7 +9,14 @@
 import UIKit
 
 class HistoryTableViewController: UITableViewController {
-
+    
+    var searchHistory:[String]? {
+        didSet {
+            println("updated search history")
+            tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,7 +26,7 @@ class HistoryTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,18 +43,17 @@ class HistoryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return searchHistory!.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PreviousSearch", forIndexPath: indexPath) as! HistoryTableViewCell
 
         // Configure the cell...
-
+        cell.historyEntry.text = searchHistory![indexPath.row]
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.

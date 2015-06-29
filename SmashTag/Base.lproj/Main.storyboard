@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5BO-8f-kb3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5BO-8f-kb3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -106,8 +106,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-E5-qTN">
-                                <rect key="frame" x="16" y="72" width="568" height="528"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-E5-qTN">
+                                <rect key="frame" x="16" y="72" width="568" height="479"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -287,20 +287,37 @@
             </objects>
             <point key="canvasLocation" x="628" y="762"/>
         </scene>
-        <!--Table View Controller-->
+        <!--History Table View Controller-->
         <scene sceneID="3wK-Qe-pMe">
             <objects>
-                <tableViewController id="oxg-F1-kVK" sceneMemberID="viewController">
+                <tableViewController id="oxg-F1-kVK" customClass="HistoryTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8mR-KG-wss">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dud-Hn-7jP">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreviousSearch" id="dud-Hn-7jP" customClass="HistoryTableViewCell" customModule="SmashTag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dud-Hn-7jP" id="Kgg-fR-9Up">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PreviousSearch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HJ-MB-lIi">
+                                            <rect key="frame" x="8" y="0.0" width="584" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3HJ-MB-lIi" firstAttribute="top" secondItem="Kgg-fR-9Up" secondAttribute="topMargin" constant="-8" id="dc3-oY-GWD"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3HJ-MB-lIi" secondAttribute="bottom" constant="14" id="lih-MP-tdS"/>
+                                        <constraint firstItem="3HJ-MB-lIi" firstAttribute="trailing" secondItem="Kgg-fR-9Up" secondAttribute="trailingMargin" id="vnb-zi-rWA"/>
+                                        <constraint firstItem="3HJ-MB-lIi" firstAttribute="leading" secondItem="Kgg-fR-9Up" secondAttribute="leadingMargin" id="wAM-wR-Wnq"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="historyEntry" destination="3HJ-MB-lIi" id="WQa-wA-HRf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -317,7 +334,7 @@
         <!--Navigation Controller-->
         <scene sceneID="m5c-OJ-rqf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1L2-i2-DZW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HistoryTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="1L2-i2-DZW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="recents" id="F5E-0L-UfH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xp0-ak-eNh">

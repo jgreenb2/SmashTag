@@ -8,6 +8,10 @@
 
 import UIKit
 
+// protocol to pass image data back to the ViewController
+// since we've already loaded the data for the preview,
+// there's no need to reload it if the user wants to view
+// the entire image.
 protocol ImageDataDelegate: class {
     func updateImageData(imageData: NSData)
 }

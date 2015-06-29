@@ -8,10 +8,13 @@
 
 import UIKit
 
-class TweetTableViewController: UITableViewController, UITextFieldDelegate {
+class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITabBarControllerDelegate {
 
     // our model is an array of an array of Tweets:
     var tweets = [[Tweet]]()
+    static let defaultSearch = "#stanford"
+    private var searchHistory:[String] = [ defaultSearch ]
+    
     var searchText: String? = "#stanford" {
         didSet {
             lastSuccessfulRequest = nil
@@ -19,7 +22,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             tweets.removeAll()
             tableView.reloadData()
             refresh()
-
+            updateHistory(searchText!)
         }
     }
     
@@ -29,6 +32,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         refresh()
+        tabBarController?.delegate = self
     }
 
     var lastSuccessfulRequest: TwitterRequest?
@@ -52,7 +56,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     @IBAction func unwindToNewSearch(segue: UIStoryboardSegue) {
-        
     }
     
     @IBAction func refresh(sender: UIRefreshControl?) {
@@ -148,4 +151,25 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 
+    private struct HistoryConfig {
+        static let MaxEntries = 100
+    }
+    
+    private func updateHistory(text:String) {
+        if text != searchHistory.first {
+            searchHistory.insert(text, atIndex: 0)
+            if searchHistory.count > 100 {
+                searchHistory.removeLast()
+            }
+        }
+    }
+        
+   func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        println("tab controller change")
+        if let hvc = viewController as? UINavigationController {
+            if let htvc = hvc.visibleViewController as? HistoryTableViewController {
+                htvc.searchHistory = self.searchHistory
+            }
+        }
+    }
 }
