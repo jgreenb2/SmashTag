@@ -65,10 +65,14 @@ class HistoryTableViewController: UITableViewController {
             if let cell = sender as? HistoryTableViewCell {
                 switch identifier {
                 case TweetSegues.NewSearch:
-                    if let ttvc = destination as? TweetTableViewController {
-                        if let cellID = cell.reuseIdentifier {
-                            if cellID == Storyboard.TextCellIdentifier {
-                                ttvc.searchText = cell.historyEntry.text
+                    if let tbc = destination as? UITabBarController {
+                        if let navCon = tbc.viewControllers?.first as? UINavigationController {
+                            if let ttvc = navCon.visibleViewController as? TweetTableViewController {
+                                if let cellID = cell.reuseIdentifier {
+                                    if cellID == Storyboard.TextCellIdentifier {
+                                        ttvc.searchText = cell.historyEntry.text
+                                    }
+                                }
                             }
                         }
                     }

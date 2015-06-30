@@ -75,9 +75,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     }
 
     @IBAction func unwindToNewSearch(segue: UIStoryboardSegue) {
-        println("unwind")
+        println("unwind search")
     }
-    
+        
     @IBAction func refresh(sender: UIRefreshControl?) {
         if searchText != nil {
             if let request = nextRequestToAttempt {

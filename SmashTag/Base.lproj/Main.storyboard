@@ -13,7 +13,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter Search Query" minimumFontSize="17" id="3lx-lD-tfs">
+                        <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter Search Query" minimumFontSize="17" id="3lx-lD-tfs">
                             <rect key="frame" x="0.0" y="-30" width="600" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="3064" y="1476"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Search NavCon-->
         <scene sceneID="uqT-fv-sVS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m2a-Le-IIL" sceneMemberID="viewController">
+                <navigationController title="Search NavCon" automaticallyAdjustsScrollViewInsets="NO" id="m2a-Le-IIL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="N0l-Sq-7wM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pli-dK-Eei">
@@ -250,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="1440" y="762"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Detail NavCon-->
         <scene sceneID="Kmj-By-Z2A">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nOk-pY-Ep9" sceneMemberID="viewController">
+                <navigationController title="Detail NavCon" automaticallyAdjustsScrollViewInsets="NO" id="nOk-pY-Ep9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QV5-d8-Bdx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -317,7 +317,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="historyEntry" destination="3HJ-MB-lIi" id="WQa-wA-HRf"/>
-                                    <segue destination="f1P-Rl-tuZ" kind="unwind" identifier="goToNewSearch" unwindAction="unwindToNewSearch:" id="ztV-2u-Kka"/>
+                                    <segue destination="5BO-8f-kb3" kind="showDetail" identifier="goToNewSearch" id="CzV-uY-Q44"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -329,14 +329,13 @@
                     <navigationItem key="navigationItem" id="XLp-7a-pfN"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ARr-rl-9cE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="f1P-Rl-tuZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1412" y="2174"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--History NavCon-->
         <scene sceneID="m5c-OJ-rqf">
             <objects>
-                <navigationController storyboardIdentifier="HistoryTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="1L2-i2-DZW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HistoryTabBarController" title="History NavCon" automaticallyAdjustsScrollViewInsets="NO" id="1L2-i2-DZW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="recents" id="F5E-0L-UfH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xp0-ak-eNh">
