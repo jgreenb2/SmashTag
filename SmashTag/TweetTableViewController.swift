@@ -12,10 +12,12 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
 
     // our model is an array of an array of Tweets:
     var tweets = [[Tweet]]()
-    static let defaultSearch = "#stanford"
-    private var searchHistory:[String] = [ defaultSearch ]
+    let defaultSearch = "#stanford"
+    private var searchHistory = [String]()
     
-    var searchText: String? = "#stanford" {
+    private var defaultStore = NSUserDefaults.standardUserDefaults()
+    
+    var searchText: String? {
         didSet {
             lastSuccessfulRequest = nil
             searchTextField?.text = searchText
@@ -26,6 +28,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        defaultStore.setObject(searchHistory, forKey: "searchHistory")
+    }
+    
     // MARK: - View Controller LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +40,12 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         tableView.rowHeight = UITableViewAutomaticDimension
         refresh()
         tabBarController?.delegate = self
+        if searchText == nil {
+            searchText = defaultSearch
+        }
+        if let history = defaultStore.stringArrayForKey("searchHistory") as? [String] {
+            searchHistory = history
+        }
     }
 
     var lastSuccessfulRequest: TwitterRequest?
@@ -52,11 +65,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         if refreshControl != nil {
             refreshControl?.beginRefreshing()
         }
-       refresh(refreshControl)
+        refresh(refreshControl)
     }
 
-    @IBAction func unwindToNewSearch(segue: UIStoryboardSegue) {
-    }
+    @IBAction func unwindToNewSearch(segue: UIStoryboardSegue) {}
     
     @IBAction func refresh(sender: UIRefreshControl?) {
         if searchText != nil {
@@ -163,7 +175,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
             }
         }
     }
-        
+    
    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         println("tab controller change")
         if let hvc = viewController as? UINavigationController {
