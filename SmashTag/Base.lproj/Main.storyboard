@@ -159,6 +159,28 @@
                                     <segue destination="ugv-S7-4EP" kind="unwind" identifier="goToNewSearch" unwindAction="unwindToNewSearch:" id="bMs-x5-rqg"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="redraw" selectionStyle="default" indentationWidth="10" reuseIdentifier="URLMentions" id="r1C-5U-PgP" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" verticalHuggingPriority="252" tableViewCell="r1C-5U-PgP" id="Zrr-SQ-b6E">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhM-hy-SHb">
+                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="leading" secondItem="Zrr-SQ-b6E" secondAttribute="leadingMargin" id="3qM-jw-0gF"/>
+                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="trailing" secondItem="Zrr-SQ-b6E" secondAttribute="trailingMargin" id="85b-7M-X5y"/>
+                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="top" secondItem="Zrr-SQ-b6E" secondAttribute="topMargin" id="Ubg-5B-Jfu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="urlView" destination="lhM-hy-SHb" id="76m-nF-GJv"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="redraw" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ImageMentions" id="sSr-Hj-h6G" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" verticalHuggingPriority="252" tableViewCell="sSr-Hj-h6G" id="QHH-yU-r70">
@@ -194,28 +216,6 @@
                                 <connections>
                                     <outlet property="mentionView" destination="XsL-hW-4C5" id="hej-pa-0JX"/>
                                     <segue destination="1xd-ty-zqw" kind="show" identifier="showImage" id="hkA-Xa-tJg"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="redraw" selectionStyle="default" indentationWidth="10" reuseIdentifier="URLMentions" id="r1C-5U-PgP" customClass="MentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" verticalHuggingPriority="252" tableViewCell="r1C-5U-PgP" id="Zrr-SQ-b6E">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhM-hy-SHb">
-                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="leading" secondItem="Zrr-SQ-b6E" secondAttribute="leadingMargin" id="3qM-jw-0gF"/>
-                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="trailing" secondItem="Zrr-SQ-b6E" secondAttribute="trailingMargin" id="85b-7M-X5y"/>
-                                        <constraint firstItem="lhM-hy-SHb" firstAttribute="top" secondItem="Zrr-SQ-b6E" secondAttribute="topMargin" id="Ubg-5B-Jfu"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="urlView" destination="lhM-hy-SHb" id="76m-nF-GJv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -296,13 +296,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreviousSearch" id="dud-Hn-7jP" customClass="HistoryTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PreviousSearch" id="dud-Hn-7jP" customClass="HistoryTableViewCell" customModule="SmashTag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dud-Hn-7jP" id="Kgg-fR-9Up">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PreviousSearch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HJ-MB-lIi">
-                                            <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                            <rect key="frame" x="8" y="8" width="551" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -317,6 +317,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="historyEntry" destination="3HJ-MB-lIi" id="WQa-wA-HRf"/>
+                                    <segue destination="f1P-Rl-tuZ" kind="unwind" identifier="goToNewSearch" unwindAction="unwindToNewSearch:" id="ztV-2u-Kka"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -328,6 +329,7 @@
                     <navigationItem key="navigationItem" id="XLp-7a-pfN"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ARr-rl-9cE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="f1P-Rl-tuZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1412" y="2174"/>
         </scene>

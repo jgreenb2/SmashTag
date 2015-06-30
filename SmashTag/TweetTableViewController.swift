@@ -12,11 +12,17 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
 
     // our model is an array of an array of Tweets:
     var tweets = [[Tweet]]()
-    let defaultSearch = "#stanford"
     private var searchHistory = [String]()
     
     private var defaultStore = NSUserDefaults.standardUserDefaults()
+
+    private struct HistoryConfig {
+        static let MaxEntries = 100
+        static let DefaultSearch = "#stanford"
+        static let DefaultNSDefaultsKey = "searchHistory"
+    }
     
+   
     var searchText: String? {
         didSet {
             lastSuccessfulRequest = nil
@@ -30,7 +36,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        defaultStore.setObject(searchHistory, forKey: "searchHistory")
+        defaultStore.setObject(searchHistory, forKey: HistoryConfig.DefaultNSDefaultsKey)
     }
     
     // MARK: - View Controller LifeCycle
@@ -41,9 +47,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         refresh()
         tabBarController?.delegate = self
         if searchText == nil {
-            searchText = defaultSearch
+            searchText = HistoryConfig.DefaultSearch
         }
-        if let history = defaultStore.stringArrayForKey("searchHistory") as? [String] {
+        if let history = defaultStore.stringArrayForKey(HistoryConfig.DefaultNSDefaultsKey) as? [String] {
             searchHistory = history
         }
     }
@@ -68,7 +74,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         refresh(refreshControl)
     }
 
-    @IBAction func unwindToNewSearch(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToNewSearch(segue: UIStoryboardSegue) {
+        println("unwind")
+    }
     
     @IBAction func refresh(sender: UIRefreshControl?) {
         if searchText != nil {
@@ -163,10 +171,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         }
     }
 
-    private struct HistoryConfig {
-        static let MaxEntries = 100
-    }
-    
     private func updateHistory(text:String) {
         if text != searchHistory.first {
             searchHistory.insert(text, atIndex: 0)
@@ -177,7 +181,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     }
     
    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-        println("tab controller change")
         if let hvc = viewController as? UINavigationController {
             if let htvc = hvc.visibleViewController as? HistoryTableViewController {
                 htvc.searchHistory = self.searchHistory
