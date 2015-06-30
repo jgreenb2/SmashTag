@@ -49,7 +49,17 @@ class HistoryTableViewController: UITableViewController {
         return cell
     }
 
+    /* 
+        overly complex and fragile code to find the correct segue target
+    
+        This won't crash but it won't work if the view topology changes much either.
+        There needs to be a better way to do this.
+    
+        This does not implement the recommendation in the homework -- it segues to
+        a the search tab in the tabBarController because it just doesn't make sense to 
+        stay in the same tab.
 
+    */
     private struct TweetSegues {
         static let NewSearch = "goToNewSearch"
     }

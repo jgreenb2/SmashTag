@@ -87,6 +87,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
                             self.lastSuccessfulRequest = request
                             self.tweets.insert(newTweets, atIndex: 0)
                             self.tableView.reloadData()
+                            // reloadSections tries to work around a known ios 8.1 bug where the
+                            // disclosure caret accessory causes auto height to fail until the
+                            // table is refreshed
                             self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections())), withRowAnimation: .None)
                         }
                         sender?.endRefreshing()
@@ -172,7 +175,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     }
 
     private func updateHistory(text:String) {
-        if text != searchHistory.first {
+        let filtered = searchHistory.filter { $0 == text }
+        if filtered.count == 0 {
             searchHistory.insert(text, atIndex: 0)
             if searchHistory.count > 100 {
                 searchHistory.removeLast()
@@ -180,6 +184,12 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         }
     }
     
+    // we've made this controller a delegate to the tabBarController so we're notified
+    // when tabs change. When it does, we update the search history data.
+    //
+    // This is also problematic because the tweet controller knows too much about it's
+    // the other controllers on the tab bar. We need to find a cleaner solution
+    //
    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         if let hvc = viewController as? UINavigationController {
             if let htvc = hvc.visibleViewController as? HistoryTableViewController {
