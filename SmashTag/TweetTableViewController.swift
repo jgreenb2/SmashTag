@@ -202,6 +202,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         }
     }
 
+    // MARK: - History Delegation Functions
     func getSearchHistory() -> [String] {
         return searchHistory
     }

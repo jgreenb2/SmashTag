@@ -30,11 +30,6 @@ class HistoryTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -73,9 +68,9 @@ class HistoryTableViewController: UITableViewController {
         if let identifier = segue.identifier {
             if let cell = sender as? HistoryTableViewCell {
                 switch identifier {
-                case TweetSegues.NewSearch:
-                    delegate?.startNewSearch(cell.historyEntry.text!)
-                default: break
+                    case TweetSegues.NewSearch:
+                        delegate?.startNewSearch(cell.historyEntry.text!)
+                    default: break
                 }
             }
         }
