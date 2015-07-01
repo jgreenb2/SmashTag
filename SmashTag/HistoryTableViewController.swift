@@ -96,9 +96,19 @@ class HistoryTableViewController: UITableViewController {
     }
     
     @IBAction func clearHistory() {
-        delegate?.clearSearchHistory()
-        searchHistory = delegate?.getSearchHistory()
-        tableView.reloadData()
+        
+        var confirm = UIAlertController(title: "Confirm Clear", message: "Delete all items? This action cannot be undone.", preferredStyle: UIAlertControllerStyle.Alert)
+
+        confirm.addAction(UIAlertAction(title: "Clear", style: UIAlertActionStyle.Destructive) {
+            (action: UIAlertAction?) -> Void in
+                self.delegate?.clearSearchHistory()
+                self.searchHistory = self.delegate?.getSearchHistory()
+                self.tableView.reloadData()
+        })
+        confirm.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action: UIAlertAction?) -> Void in
+            return
+        })
+        presentViewController(confirm, animated: true, completion: nil)
     }
     
     func updateHistory() {
