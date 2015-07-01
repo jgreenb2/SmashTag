@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol HistoryDelegate: class {
+    func getSearchHistory() -> [String]
+    func clearSearchHistory()
+    func startNewSearch(newSearchText:String)
+}
+
 class HistoryTableViewController: UITableViewController {
+    weak var delegate: HistoryDelegate?
     
     var searchHistory:[String]? {
         didSet {
@@ -18,6 +25,7 @@ class HistoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchHistory = delegate?.getSearchHistory()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -30,15 +38,11 @@ class HistoryTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return searchHistory!.count
+         return searchHistory!.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -50,11 +54,6 @@ class HistoryTableViewController: UITableViewController {
     }
 
     /* 
-        overly complex and fragile code to find the correct segue target
-    
-        This won't crash but it won't work if the view topology changes much either.
-        There needs to be a better way to do this.
-    
         This does not implement the recommendation in the homework -- it segues to
         a the search tab in the tabBarController because it just doesn't make sense to 
         stay in the same tab.
@@ -75,21 +74,20 @@ class HistoryTableViewController: UITableViewController {
             if let cell = sender as? HistoryTableViewCell {
                 switch identifier {
                 case TweetSegues.NewSearch:
-                    if let tbc = destination as? UITabBarController {
-                        if let navCon = tbc.viewControllers?.first as? UINavigationController {
-                            if let ttvc = navCon.visibleViewController as? TweetTableViewController {
-                                if let cellID = cell.reuseIdentifier {
-                                    if cellID == Storyboard.TextCellIdentifier {
-                                        ttvc.searchText = cell.historyEntry.text
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    delegate?.startNewSearch(cell.historyEntry.text!)
                 default: break
                 }
             }
         }
     }
-
+    
+    @IBAction func clearHistory() {
+        delegate?.clearSearchHistory()
+        searchHistory = delegate?.getSearchHistory()
+        tableView.reloadData()
+    }
+    
+    func updateHistory() {
+        searchHistory = delegate?.getSearchHistory()
+    }
 }
