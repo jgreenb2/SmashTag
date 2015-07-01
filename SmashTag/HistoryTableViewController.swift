@@ -12,6 +12,7 @@ protocol HistoryDelegate: class {
     func getSearchHistory() -> [String]
     func clearSearchHistory()
     func startNewSearch(newSearchText:String)
+    func deleteHistoryEntryAt(indexPath: NSIndexPath)
 }
 
 class HistoryTableViewController: UITableViewController {
@@ -29,6 +30,7 @@ class HistoryTableViewController: UITableViewController {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title="Recent Searches"
+        tableView.scrollsToTop=true
     }
     
     // MARK: - Table view data source
@@ -47,6 +49,22 @@ class HistoryTableViewController: UITableViewController {
         // Configure the cell...
         cell.historyEntry.text = searchHistory![indexPath.row]
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.Delete
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            delegate?.deleteHistoryEntryAt(indexPath)
+            searchHistory = delegate?.getSearchHistory()
+            tableView.reloadData()
+        }
     }
 
     /* 

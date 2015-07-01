@@ -43,6 +43,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
             searchText = HistoryConfig.DefaultSearch
         }
         navigationItem.title="Search Results"
+        tableView.scrollsToTop=true
     }
 
 
@@ -217,6 +218,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     func startNewSearch(newSearchText: String) {
         searchText = newSearchText
         saveHistory()
+    }
+    
+    func deleteHistoryEntryAt(indexPath: NSIndexPath) {
+        searchHistory.removeAtIndex(indexPath.row)
     }
     
     // finds the History View Controller, sets this controller
