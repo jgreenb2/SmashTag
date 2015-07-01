@@ -42,6 +42,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
         if searchText == nil {
             searchText = HistoryConfig.DefaultSearch
         }
+        navigationItem.title="Search Results"
     }
 
 

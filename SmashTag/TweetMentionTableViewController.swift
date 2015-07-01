@@ -87,6 +87,7 @@ class TweetMentionTableViewController: UITableViewController, ImageDataDelegate 
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title="Mentions"
     }
 
 

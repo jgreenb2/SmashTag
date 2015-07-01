@@ -28,6 +28,7 @@ class HistoryTableViewController: UITableViewController {
         searchHistory = delegate?.getSearchHistory()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+        navigationItem.title="Recent Searches"
     }
     
     // MARK: - Table view data source
