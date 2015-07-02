@@ -26,7 +26,7 @@ class HistoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchHistory = delegate?.getSearchHistory()
+        updateHistory()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title="Recent Searches"
