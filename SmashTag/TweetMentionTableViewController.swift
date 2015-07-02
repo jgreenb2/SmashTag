@@ -79,6 +79,9 @@ class TweetMentionTableViewController: UITableViewController, ImageDataDelegate 
             for user in tweet!.userMentions {
                 addMention(mention: Mentions.Users(user.keyword))
             }
+            if let poster = tweet!.user {
+                addMention(mention: Mentions.Users("from:"+poster.screenName))
+            }
         }
     }
     
