@@ -76,13 +76,13 @@ class TweetMentionTableViewController: UITableViewController, ImageDataDelegate 
             for hashtag in tweet!.hashtags {
                 addMention(mention: Mentions.Hashtags(hashtag.keyword))
             }
-            for user in tweet!.userMentions {
-                addMention(mention: Mentions.Users(user.keyword))
-            }
             if let poster = tweet!.user {
                 addMention(mention: Mentions.Users("from:"+poster.screenName))
             }
-        }
+            for user in tweet!.userMentions {
+                addMention(mention: Mentions.Users(user.keyword))
+            }
+         }
     }
     
     var imageData: NSData?
