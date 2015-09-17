@@ -80,9 +80,9 @@ class HistoryTableViewController: UITableViewController {
         static let TextCellIdentifier = "PreviousSearch"
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var destination = segue.destinationViewController as? UIViewController
+        var destination = segue.destinationViewController as UIViewController
         if let navCon = destination as? UINavigationController {
-            destination = navCon.visibleViewController
+            destination = navCon.visibleViewController!
         }
         if let identifier = segue.identifier {
             if let cell = sender as? HistoryTableViewCell {
@@ -97,15 +97,15 @@ class HistoryTableViewController: UITableViewController {
     
     @IBAction func clearHistory() {
         
-        var confirm = UIAlertController(title: "Confirm Clear", message: "Delete all items? This action cannot be undone.", preferredStyle: UIAlertControllerStyle.Alert)
+        let confirm = UIAlertController(title: "Confirm Clear", message: "Delete all items? This action cannot be undone.", preferredStyle: UIAlertControllerStyle.Alert)
 
         confirm.addAction(UIAlertAction(title: "Clear", style: UIAlertActionStyle.Destructive) {
-            (action: UIAlertAction?) -> Void in
+            (action: UIAlertAction) -> Void in
                 self.delegate?.clearSearchHistory()
                 self.searchHistory = self.delegate?.getSearchHistory()
                 self.tableView.reloadData()
         })
-        confirm.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action: UIAlertAction?) -> Void in
+        confirm.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action: UIAlertAction) -> Void in
             return
         })
         presentViewController(confirm, animated: true, completion: nil)

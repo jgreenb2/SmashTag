@@ -40,7 +40,7 @@ class MentionTableViewCell: UITableViewCell {
     }
     
     func fetchImage(aspectRatio: Double, _ url: NSURL) {
-        let qos = Int(QOS_CLASS_USER_INITIATED.value) // legacy qos variable stuff
+        let qos = Int(QOS_CLASS_USER_INITIATED.rawValue) // legacy qos variable stuff
         imageUrl = url
         dispatch_async(dispatch_get_global_queue(qos, 0)) {
             let imageData = NSData(contentsOfURL: url)
@@ -63,8 +63,8 @@ class MentionTableViewCell: UITableViewCell {
     }
  
     func refreshURLCell(string: String) {
-        var attributes = [NSUnderlineStyleAttributeName:1, NSForegroundColorAttributeName: UIColor.blueColor()]
-        var attributedString = NSAttributedString(string: string, attributes: attributes)
+        let attributes = [NSUnderlineStyleAttributeName:1, NSForegroundColorAttributeName: UIColor.blueColor()]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
         urlView.attributedText = attributedString
     }
 

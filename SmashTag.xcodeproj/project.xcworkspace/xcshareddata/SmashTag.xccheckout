@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>25C2F2B0-825F-4F0F-8457-D62CBB077813</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SmashTag</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F38D868B544C31E99154498BF8E89EBF58E85568</key>
+		<string>https://github.com/jgreenb2/SmashTag.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SmashTag.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F38D868B544C31E99154498BF8E89EBF58E85568</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jgreenb2/SmashTag.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F38D868B544C31E99154498BF8E89EBF58E85568</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F38D868B544C31E99154498BF8E89EBF58E85568</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SmashTag</string>
+		</dict>
+	</array>
+</dict>
+</plist>

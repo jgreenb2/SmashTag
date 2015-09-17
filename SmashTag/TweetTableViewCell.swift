@@ -55,7 +55,7 @@ class TweetTableViewCell: UITableViewCell {
     
     func highlightTweetText(tweet: Tweet) -> NSAttributedString {
         
-        var highlightedString = NSMutableAttributedString(string: tweet.text)
+        let highlightedString = NSMutableAttributedString(string: tweet.text)
         
         for hash in tweet.hashtags {
             highlightedString.addAttribute(NSForegroundColorAttributeName, value: HighlightColors.hashColor, range: hash.nsrange)
@@ -72,19 +72,19 @@ class TweetTableViewCell: UITableViewCell {
 }
 
 private func + (s1: NSAttributedString, s2: String) -> NSAttributedString {
-    var newAStr = NSMutableAttributedString(attributedString: s1)
+    let newAStr = NSMutableAttributedString(attributedString: s1)
     newAStr.appendAttributedString(NSAttributedString(string: s2))
     return newAStr
 }
 
 private func + (s1: String, s2: NSAttributedString) -> NSAttributedString {
-    var newAStr = NSMutableAttributedString(string: s1)
+    let newAStr = NSMutableAttributedString(string: s1)
     newAStr.appendAttributedString(s2)
     return newAStr
 }
 
 private func + (s1: NSAttributedString, s2: NSAttributedString) -> NSMutableAttributedString {
-    var newAStr = NSMutableAttributedString(attributedString: s1)
+    let newAStr = NSMutableAttributedString(attributedString: s1)
     newAStr.appendAttributedString(s2)
     return newAStr
 }

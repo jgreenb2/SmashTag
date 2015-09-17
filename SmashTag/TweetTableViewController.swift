@@ -81,7 +81,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
                             // reloadSections tries to work around a known ios 8.1 bug where the
                             // disclosure caret accessory causes auto height to fail until the
                             // table is refreshed
-                            self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections())), withRowAnimation: .None)
+                            self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
                         }
                         sender?.endRefreshing()
                     }
@@ -141,16 +141,16 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var destination = segue.destinationViewController as? UIViewController
+        var destination = segue.destinationViewController as UIViewController
         if let navCon = destination as? UINavigationController {
-            destination = navCon.visibleViewController
+            destination = navCon.visibleViewController!
         }
         if let mentionTableViewController = destination as? TweetMentionTableViewController {
             if let identifier = segue.identifier {
                 switch identifier {
                 case TweetTableSegues.MentionSegue:
-                    if let row = tweetTableView.indexPathForSelectedRow()?.row {
-                        let section = tweetTableView.indexPathForSelectedRow()!.section
+                    if let row = tweetTableView.indexPathForSelectedRow?.row {
+                        let section = tweetTableView.indexPathForSelectedRow!.section
                         mentionTableViewController.tweet = tweets[section][row]
                     }
                 default: break
@@ -186,7 +186,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     }
     
     private func restoreHistory() {
-        if let history = defaultStore.stringArrayForKey(HistoryConfig.KeyForHistoryArray) as? [String] {
+        if let history = defaultStore.stringArrayForKey(HistoryConfig.KeyForHistoryArray) {
             searchHistory = history
         }
         searchText = defaultStore.stringForKey(HistoryConfig.KeyForLastSearch)
@@ -227,7 +227,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UITa
     // finds the History View Controller, sets this controller
     // as it's delegate and returns a ref to the history controller
     private func setHistoryDelegate() -> HistoryTableViewController? {
-        if let vcs = tabBarController?.viewControllers {
+        if let vcs = tabBarController?.viewControllers as? [UINavigationController] {
             for vc in vcs {
                 if vc.title == HistoryConfig.ControllerTitle {
                     if let htvc = vc.visibleViewController as? HistoryTableViewController {
