@@ -70,7 +70,7 @@
                                     <outlet property="tweetProfileImageView" destination="in5-8O-Q04" id="ToU-GW-hlP"/>
                                     <outlet property="tweetScreenNameLabel" destination="mPs-U3-rB7" id="jRu-jc-vOm"/>
                                     <outlet property="tweetTextLabel" destination="gfC-4A-stj" id="Jcp-GC-0CI"/>
-                                    <segue destination="nOk-pY-Ep9" kind="show" identifier="ShowMentionTable" id="gLk-bL-g5k"/>
+                                    <segue destination="nOk-pY-Ep9" kind="showDetail" identifier="ShowMentionTable" id="gLk-bL-g5k"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -262,6 +262,7 @@
         <!--Detail NavCon-->
         <scene sceneID="Kmj-By-Z2A">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pG0-PZ-wCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Detail NavCon" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="nOk-pY-Ep9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QV5-d8-Bdx">
@@ -277,7 +278,6 @@
                         <segue destination="XoJ-bS-pcQ" kind="relationship" relationship="rootViewController" id="yvI-dh-LQ0"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pG0-PZ-wCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2252" y="1476"/>
         </scene>
@@ -332,7 +332,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="historyEntry" destination="3HJ-MB-lIi" id="WQa-wA-HRf"/>
-                                    <segue destination="5BO-8f-kb3" kind="showDetail" identifier="goToNewSearch" id="CzV-uY-Q44"/>
+                                    <segue destination="5BO-8f-kb3" kind="show" identifier="goToNewSearch" id="CzV-uY-Q44"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
