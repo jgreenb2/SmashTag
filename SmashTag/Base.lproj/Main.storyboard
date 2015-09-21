@@ -70,7 +70,7 @@
                                     <outlet property="tweetProfileImageView" destination="in5-8O-Q04" id="ToU-GW-hlP"/>
                                     <outlet property="tweetScreenNameLabel" destination="mPs-U3-rB7" id="jRu-jc-vOm"/>
                                     <outlet property="tweetTextLabel" destination="gfC-4A-stj" id="Jcp-GC-0CI"/>
-                                    <segue destination="nOk-pY-Ep9" kind="showDetail" identifier="ShowMentionTable" id="gLk-bL-g5k"/>
+                                    <segue destination="XoJ-bS-pcQ" kind="show" identifier="ShowMentionTable" id="0Xb-6e-R3s"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -109,7 +109,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-E5-qTN">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-E5-qTN">
                                 <rect key="frame" x="20" y="72" width="560" height="479"/>
                             </scrollView>
                         </subviews>
@@ -127,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rBK-g6-tey" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3868" y="1476"/>
+            <point key="canvasLocation" x="3144" y="1960"/>
         </scene>
         <!--Tweet Mention Table View Controller-->
         <scene sceneID="JU7-ZZ-0PZ">
@@ -238,7 +238,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRl-iz-YzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ugv-S7-4EP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3064" y="1476"/>
+            <point key="canvasLocation" x="3144" y="762"/>
         </scene>
         <!--Search NavCon-->
         <scene sceneID="uqT-fv-sVS">
@@ -258,28 +258,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6a-aU-I8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1440" y="762"/>
-        </scene>
-        <!--Detail NavCon-->
-        <scene sceneID="Kmj-By-Z2A">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pG0-PZ-wCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController title="Detail NavCon" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="nOk-pY-Ep9" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QV5-d8-Bdx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="uqz-du-J3l">
-                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="XoJ-bS-pcQ" kind="relationship" relationship="rootViewController" id="yvI-dh-LQ0"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="2252" y="1476"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ytb-K1-7rj">
